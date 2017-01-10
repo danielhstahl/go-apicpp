@@ -9,7 +9,48 @@ import (
 )
 
 const isDev bool = false
-
+type marketRiskInput struct{
+    Port string 
+    Date string
+    Amount int
+    Material string
+    Comment string
+}
+type creditRiskInput struct{
+    Port string 
+    Date string
+    Amount int
+    Material string
+    Comment string
+}
+type opsRiskInput struct{
+    Port string 
+    Date string
+    Amount int
+    Material string
+    Comment string
+}
+type marketRiskOutput struct{
+    Port string 
+    Date string
+    Amount int
+    Material string
+    Comment string
+}
+type creditRiskOutput struct{
+    Port string 
+    Date string
+    Amount int
+    Material string
+    Comment string
+}
+type opsRiskOutput struct{
+    Port string 
+    Date string
+    Amount int
+    Material string
+    Comment string
+}
 func writePortType(w http.ResponseWriter, r *auth.AuthenticatedRequest){
     if(isDev){
         w.Header().Set("Access-Control-Allow-Origin", "*")
