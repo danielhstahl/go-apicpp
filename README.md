@@ -1,1 +1,3 @@
-#DEPRICATED!  Use cppAPI repository.
+#Use
+run `./getcpppackages.sh`
+then run the binary
