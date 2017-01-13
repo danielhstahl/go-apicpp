@@ -4,7 +4,7 @@ package main
 // "encoding/json"
 //"os/exec"
 import (
-    
+    "os/exec"
     "log"
     "net/http"
     "os"
@@ -67,14 +67,36 @@ type opsRiskOutput struct{
     Material string
     Comment string
 }*/
+/*type generic_struct struct {
+	params string
+}*/
 func handleExecute(w http.ResponseWriter, r *http.Request/**auth.AuthenticatedRequest*/, command string){
     if(isDev){
         w.Header().Set("Access-Control-Allow-Origin", "*")
         w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     }
-    log.Println(r.Body)
-    //grepCmd := exec.Command(command, "hello")
-
+    //var myJson generic_struct 
+    var anyJson map[string]interface{}
+    decoder := json.NewDecoder(r.Body)
+    err := decoder.Decode(&anyJson)
+    if err != nil {
+        log.Println(err) 
+    }
+    //log.Println(string(r.Body))
+    //body, _ := ioutil.ReadAll(r.Body)
+    //json.Unmarshal(body, &anyJson)
+    //log.Println(anyJson["params"])
+    jsonString, err := json.Marshal(anyJson)
+    if err!=nil {
+        log.Println(err)
+    }
+    log.Println(jsonString)
+    cppCmd, err:= exec.Command(command, string(jsonString)).Output()
+    if err!=nil{
+        log.Println(err)
+    }
+    result := string(cppCmd)
+    json.NewEncoder(w).Encode(result)
     /*decoder := json.NewDecoder(r.Body)
     var t portType   
     err := decoder.Decode(&t)
