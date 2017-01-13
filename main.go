@@ -12,7 +12,7 @@ import (
    "encoding/json"
 )
 
-const isDev bool = true
+const isDev bool = false
 
 type env struct{ //environmental variables
     Statichtml string
@@ -149,6 +149,6 @@ func main(){
         handleExecute(w, r, "./opsRisk")
     })
     log.Println("Listening...")
-    http.ListenAndServe(":3001", nil)
+    http.ListenAndServe(":80", nil)
      
 }
