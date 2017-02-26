@@ -1,3 +1,3 @@
 #Use
 run `./getcpppackages.sh`
-then run the binary
+then compile: `go build`
